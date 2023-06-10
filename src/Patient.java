@@ -24,12 +24,12 @@ public class Patient extends Person {
     public String getDischargeDate() {return dischargeDate;}
 
     //printer
-    public void dataPatient() {
-        System.out.println("Name: " + getName());
-        System.out.println("Age: " + getAge());
-        System.out.println("Gender: " + getGender());
-        System.out.println("Diagnosis: " + diagnosis);
-        System.out.println("Admission Date: " + admissionDate);
-        System.out.println("Discharge Date: " + dischargeDate);
+    @Override
+    public String toString() {
+        return "Patient [Name: " + getName() +
+               ", Gender: " + getGender() +
+               ", Diagnosis: " + getDiagnosis() +
+               ", Admission Date: " + getAdmissionDate() +
+               ", Discharge Date: " + getDischargeDate() + "]";
     }
 }

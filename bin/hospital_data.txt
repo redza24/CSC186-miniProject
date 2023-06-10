@@ -1,0 +1,24 @@
+<<< DOCTORS >>>
+
+DOCTOR 1
+Doctor data is missing.
+
+DOCTOR 2
+Doctor data is missing.
+
+<<< PATIENTS >>>
+
+PATIENT 1
+Patient [Name: adam, Gender: ,, Diagnosis: awd, Admission Date: awd, Discharge Date: awd]
+
+PATIENT 2
+Patient [Name: 1241244r1d, Gender: f, Diagnosis: gay, Admission Date: 124, Discharge Date: ]
+
+<<< WARD ROOMS >>>
+
+WARD ROOM 1
+Ward room data is missing.
+
+WARD ROOM 2
+Ward room data is missing.
+

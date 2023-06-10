@@ -29,13 +29,14 @@ public class Doctor extends Person {
     public String getEmail() {return email;}
 
     //printer
-    public void dataDoctor() {
-        System.out.println("Name: " + getName());
-        System.out.println("Gender: " + getGender());
-        System.out.println("Specialization: " + specialization);
-        System.out.println("Availability: " + availability);
-        System.out.println("Contact Number: " + contactNum);
-        System.out.println("Email: " + email);
+    @Override
+    public String toString() {
+        return "Doctor [Name: " + getName() +
+               ", Gender: " + getGender() +
+               ", Specialization: " + getSpecialization() +
+               ", Availability: " + getAvailability() +
+               ", Contact Number: " + getContactNum() +
+               ", Email: " + getEmail() + "]";
     }
 
 }

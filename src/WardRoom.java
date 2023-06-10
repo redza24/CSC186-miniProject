@@ -22,16 +22,16 @@ public class WardRoom {
 
     //getter
     public String getRoomNum() {return roomNum;}
-    public int capacity() {return capacity;}
-    public int occupiedCap() {return occupiedCap;}
-    public Patient patient() {return patient;}
+    public int getCapacity() {return capacity;}
+    public int getOccupiedCap() {return occupiedCap;}
+    public Patient getPatient() {return patient;}
 
-    public String toString(){
-        return "Room Number: " + roomNum + "\nCapacity: " + capacity + "\nOccupied Capacity" + occupiedCap;
-    }
-    public void dataWard() {
-        System.out.println("Room Number: " + roomNum);
-        System.out.println("Capacity: " + capacity);
-        System.out.println("Occupied Capacity: " + occupiedCap);
+    //printer
+    @Override
+    public String toString() {
+        return "WardRoom [Room Number: " + getRoomNum() +
+               ", Capacity: " + getCapacity() +
+               ", Occupied Capacity: " + getOccupiedCap() +
+               ", Assigned Patient: " + getPatient() + "]";
     }
 }
