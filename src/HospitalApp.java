@@ -142,7 +142,7 @@ public class HospitalApp {
                     capacity++;
                 }
                 else {
-                    System.out.println("Invalid Patients");
+                    System.out.println("Invalid Patient.");
                 }
             }
             if (capacity == occupiedCap){
