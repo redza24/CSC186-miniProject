@@ -261,7 +261,7 @@ public class HospitalApp {
 
             System.out.println("\u001B[32mData saved successfully to hospital_data.txt.\u001B[0m");
         } catch (IOException e) {
-            System.out.println("\\u001B[31mAn error occurred while saving the data to hospital_data.txt.\\u001B[0m");
+            System.out.println("\u001B[31mAn error occurred while saving the data to hospital_data.txt.\u001B[0m");
             e.printStackTrace();
         }
     }
