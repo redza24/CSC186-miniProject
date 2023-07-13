@@ -6,8 +6,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class HospitalApp {
-    private static Scanner scan = new Scanner(System.in); //for string
-    private static Scanner scan1 = new Scanner(System.in); 
+    private static Scanner scan = new Scanner(System.in); // for string
+    private static Scanner scan1 = new Scanner(System.in);
     private static final int MAX_DOCTORS = 3;
     private static final int MAX_PATIENTS = 3;
     private static final int MAX_WARDROOMS = MAX_PATIENTS;
@@ -16,6 +16,7 @@ public class HospitalApp {
     private static LocalDate currentDate = LocalDate.now();
 
     public static void main(String[] args) {
+        clearScreen();
         int choice = 0;
         while (choice != 8) {
             displayMenu();
@@ -51,7 +52,7 @@ public class HospitalApp {
                     break;
             }
         }
-    }
+    } // end main
 
     public static void displayMenu() {
         System.out.println("\n===== Hospital Management System =====");
@@ -68,6 +69,7 @@ public class HospitalApp {
     }
 
     public static void addDoctor() {
+        clearScreen();
         for (int i = 0; i < MAX_DOCTORS; i++) {
             System.out.println("\n<<<<<< ADD DOCTOR >>>>>>>");
             System.out.print("Name: ");
@@ -92,6 +94,7 @@ public class HospitalApp {
     }
 
     public static void addPatient() {
+        clearScreen();
         for (int i = MAX_DOCTORS; i < MAX_DOCTORS + MAX_PATIENTS; i++) {
             System.out.println("\n<<<<<< ADD PATIENT >>>>>>>");
             System.out.print("Name: ");
@@ -114,8 +117,9 @@ public class HospitalApp {
         System.out.println("Data stored successfully.");
     }
 
-  // choice no.3: Add Ward Room
+    // choice no.3: Add Ward Room
     public static void addWardRoom() {
+        clearScreen();
         for (int i = 0; i < MAX_WARDROOMS; i++) {
             Random random = new Random(50); // random number for ward room
             System.out.println("<<<<<<<<<< ASSIGN PATIENT TO WARD ROOM >>>>>>>>>>");
@@ -144,7 +148,7 @@ public class HospitalApp {
                         boolean insurance = pt.getInsurance();
                         // store onto object
                         wardRooms[i] = new WardRoom(roomType, roomNum, heldWard, deposit, name, age, gender,
-                                                    diagnosis, admissionDate, dischargeDate, insurance);
+                                diagnosis, admissionDate, dischargeDate, insurance);
                         System.out.println("Total Price: RM" + wardRooms[i].calcTotal() + "\n");
                     }
                     if (roomType.equalsIgnoreCase("basic")) {
@@ -160,7 +164,7 @@ public class HospitalApp {
                         boolean insurance = pt.getInsurance();
                         // store onto object
                         wardRooms[i] = new WardRoom(roomType, roomNum, heldWard, deposit, name, age, gender,
-                                                    diagnosis, admissionDate, dischargeDate, insurance);
+                                diagnosis, admissionDate, dischargeDate, insurance);
                         System.out.println("Total Price: RM" + wardRooms[i].calcTotal() + "\n");
                     }
                 } else {
@@ -174,6 +178,7 @@ public class HospitalApp {
     }
 
     public static void viewDoctors() {
+        clearScreen();
         System.out.println("\n===== DISPLAY DOCTORS =====");
 
         boolean doctorsFound = false;
@@ -191,6 +196,7 @@ public class HospitalApp {
     }
 
     public static void viewPatients() {
+        clearScreen();
         System.out.println("\n===== DISPLAY PATIENTS =====");
 
         boolean patientsFound = false;
@@ -208,6 +214,7 @@ public class HospitalApp {
     }
 
     public static void viewWardRooms() {
+        clearScreen();
         System.out.println("\n===== DISPLAY WARD ROOMS =====");
 
         boolean wardRoomsFound = false;
@@ -224,6 +231,7 @@ public class HospitalApp {
     }
 
     public static void saveRecords() {
+        clearScreen();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("hospital_data.txt"))) {
             writer.write("======= HOSPITAL RECORD =======\n");
             writer.write("Date: " + currentDate + "\n\n");
@@ -251,10 +259,15 @@ public class HospitalApp {
                 }
             }
 
-            System.out.println("Data saved successfully to hospital_data.txt.");
+            System.out.println("\u001B[32mData saved successfully to hospital_data.txt.\u001B[0m");
         } catch (IOException e) {
-            System.out.println("An error occurred while saving the data to hospital_data.txt.");
+            System.out.println("\\u001B[31mAn error occurred while saving the data to hospital_data.txt.\\u001B[0m");
             e.printStackTrace();
         }
     }
-}
+
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J"); // ANSI escape code to clear the screen
+        System.out.flush();
+    }
+} // end class
