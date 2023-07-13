@@ -1,5 +1,4 @@
 public class Doctor extends Person {
-    //instance variable/attributes
     private String specialization;
     private char availability;
     private String contactNum;
@@ -29,13 +28,14 @@ public class Doctor extends Person {
     public String getEmail() {return email;}
 
     //printer
-    public void dataDoctor() {
-        System.out.println("Name: " + getName());
-        System.out.println("Gender: " + getGender());
-        System.out.println("Specialization: " + specialization);
-        System.out.println("Availability: " + availability);
-        System.out.println("Contact Number: " + contactNum);
-        System.out.println("Email: " + email);
+    public String toString(){
+        return "\nName: " + getName()
+        + "\nAge: " + getAge()
+        + "\nGender: " + getGender()
+        + "\nSpecialization: " + specialization
+        + "\nAvailability: " + availability
+        + "\nContact Number: " + contactNum
+        + "\nEmail: " + email;
     }
 
 }
