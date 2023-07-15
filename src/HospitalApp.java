@@ -1,6 +1,7 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.Scanner;
@@ -56,7 +57,7 @@ public class HospitalApp {
 
     public static void displayMenu() {
         System.out.println("\n===== Hospital Management System =====");
-        System.out.println("Date: " + currentDate);
+        System.out.println("Date: " + currentDate + "\tDay: " + currentDate.getDayOfWeek());
         System.out.println();
         System.out.println("1. Add Doctor");
         System.out.println("2. Add Patient");
@@ -124,6 +125,7 @@ public class HospitalApp {
     // choice no.3: Add Ward Room
     public static void addWardRoom() {
         clearScreen();
+
         for (int i = 0; i < MAX_WARDROOMS; i++) {
             Random random = new Random(50); // random number for ward room
             System.out.println("<<<<<<<<<< ASSIGN PATIENT TO WARD ROOM >>>>>>>>>>");
@@ -236,7 +238,7 @@ public class HospitalApp {
         clearScreen();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("hospital_data.txt"))) {
             writer.write("======= HOSPITAL RECORD =======\n");
-            writer.write("Date: " + currentDate + "\n");
+            writer.write("Date: " + currentDate + "\tDay: " + currentDate.getDayOfWeek() + "\n");
 
             writer.write("\n===== DOCTORS =====\n");
             int doctorCount = 0;
