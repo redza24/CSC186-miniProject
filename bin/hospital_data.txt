@@ -1,9 +1,11 @@
 ======= HOSPITAL RECORD =======
-Date: 2023-07-13
+Date: 2023-07-15
 
 ===== DOCTORS =====
+No doctors found.
 
 ===== PATIENTS =====
+No patients found.
 
 ===== WARD ROOMS =====
-
+No ward rooms found.

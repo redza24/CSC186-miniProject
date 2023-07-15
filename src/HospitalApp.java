@@ -234,29 +234,47 @@ public class HospitalApp {
         clearScreen();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("hospital_data.txt"))) {
             writer.write("======= HOSPITAL RECORD =======\n");
-            writer.write("Date: " + currentDate + "\n\n");
+            writer.write("Date: " + currentDate + "\n");
 
-            writer.write("===== DOCTORS =====\n\n");
+            writer.write("\n===== DOCTORS =====\n");
+            int doctorCount = 0;
             for (int i = 0; i < MAX_DOCTORS; i++) {
                 if (persons[i] instanceof Doctor) {
+                    doctorCount++;
+                    writer.write("Doctor " + doctorCount + "\n");
                     Doctor doctor = (Doctor) persons[i];
                     writer.write(doctor.toString() + "\n");
                 }
             }
+            if (doctorCount == 0) {
+                writer.write("No doctors found.\n");
+            }
 
-            writer.write("===== PATIENTS =====\n\n");
-            for (int i = MAX_DOCTORS; i < MAX_DOCTORS + MAX_PATIENTS; i++) {
+            writer.write("\n===== PATIENTS =====\n");
+            int patientCount = 0;
+            for (int i = 0; i < MAX_PATIENTS; i++) {
                 if (persons[i] instanceof Patient) {
+                    patientCount++;
+                    writer.write("Patient " + patientCount + "\n");
                     Patient patient = (Patient) persons[i];
                     writer.write(patient.toString() + "\n");
                 }
             }
+            if (patientCount == 0) {
+                writer.write("No patients found.\n");
+            }
 
-            writer.write("===== WARD ROOMS =====\n\n");
+            writer.write("\n===== WARD ROOMS =====\n");
+            int wardRoomCount = 0;
             for (int i = 0; i < MAX_WARDROOMS; i++) {
                 if (wardRooms[i] != null) {
-                    writer.write(wardRooms[i].toString() + "\n");
+                    doctorCount++;
+                    writer.write("Ward Room " + wardRoomCount + "\n");
+                    writer.write(wardRooms.toString() + "\n");
                 }
+            }
+            if (wardRoomCount == 0) {
+                writer.write("No ward rooms found.\n");
             }
 
             System.out.println("\u001B[32mData saved successfully to hospital_data.txt.\u001B[0m");
