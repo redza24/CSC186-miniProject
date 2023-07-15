@@ -1,11 +1,28 @@
 ======= HOSPITAL RECORD =======
-Date: 2023-07-15
+Date: 2023-07-16	Day: SUNDAY
 
 ===== DOCTORS =====
 No doctors found.
 
 ===== PATIENTS =====
-No patients found.
+
+	Patient 1
+Name: ADAM
+Age: 12
+Gender: M
+Diagnosis: 123
+Admission Date: 132
+Discharge Date: 123
+Insurance: true
+
+	Patient 2
+Name: AKI
+Age: 12
+Gender: M
+Diagnosis: ADW
+Admission Date: AWD
+Discharge Date: AWD
+Insurance: false
 
 ===== WARD ROOMS =====
 No ward rooms found.

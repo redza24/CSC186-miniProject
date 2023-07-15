@@ -1,7 +1,6 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.Scanner;
@@ -11,7 +10,7 @@ public class HospitalApp {
     private static Scanner scan1 = new Scanner(System.in);
     private static final int MAX_DOCTORS = 2;
     private static final int MAX_PATIENTS = 2;
-    private static final int MAX_WARDROOMS = MAX_PATIENTS + MAX_DOCTORS;
+    private static final int MAX_WARDROOMS = MAX_PATIENTS;
     private static Person[] persons = new Person[MAX_PATIENTS + MAX_DOCTORS];
     private static WardRoom[] wardRooms = new WardRoom[MAX_WARDROOMS];
     private static LocalDate currentDate = LocalDate.now();
@@ -25,31 +24,40 @@ public class HospitalApp {
 
             switch (choice) {
                 case 1:
+                    clearScreen();
                     addDoctor();
                     break;
                 case 2:
+                    clearScreen();
                     addPatient();
                     break;
                 case 3:
+                    clearScreen();
                     addWardRoom();
                     break;
                 case 4:
+                    clearScreen();
                     viewDoctors();
                     break;
                 case 5:
+                    clearScreen();
                     viewPatients();
                     break;
                 case 6:
+                    clearScreen();
                     viewWardRooms();
                     break;
                 case 7:
+                    clearScreen();
                     saveRecords();
                     break;
                 case 8:
-                    System.out.println("Thank you for using our services.");
+                    clearScreen();
+                    System.out.println("\n\tThank you for using our services.\n");
                     break;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    clearScreen();
+                    System.out.println("\n\tInvalid choice. Please try again.\n");
                     break;
             }
         }
@@ -72,7 +80,6 @@ public class HospitalApp {
     }
 
     public static void addDoctor() {
-        clearScreen();
         for (int i = 0; i < MAX_DOCTORS; i++) {
             System.out.println("\n<<<<<< ADD DOCTOR >>>>>>>");
             System.out.print("Name: ");
@@ -98,7 +105,6 @@ public class HospitalApp {
     }
 
     public static void addPatient() {
-        clearScreen();
         for (int i = MAX_DOCTORS; i < MAX_DOCTORS + MAX_PATIENTS; i++) {
             System.out.println("\n<<<<<< ADD PATIENT >>>>>>>");
             System.out.print("Name: ");
@@ -124,23 +130,31 @@ public class HospitalApp {
 
     // choice no.3: Add Ward Room
     public static void addWardRoom() {
-        clearScreen();
+        Random random = new Random(50); // random number for ward room
+        int roomNum = 0;
+        
+        System.out.println("<<<<<<<<<< ASSIGN PATIENT TO WARD ROOM >>>>>>>>>>");
+        System.out.print("Patient Name: ");
+        String nameCompare = scan.nextLine().toUpperCase();
+        System.out.println("--------Number of persons: " + (MAX_DOCTORS + MAX_PATIENTS)); ///////////////////////////////////////////
+        boolean nameFound = false;
 
-        for (int i = 0; i < MAX_WARDROOMS; i++) {
-            Random random = new Random(50); // random number for ward room
-            System.out.println("<<<<<<<<<< ASSIGN PATIENT TO WARD ROOM >>>>>>>>>>");
-            System.out.print("Patient Name: ");
-            String nameCompare = scan.nextLine().toUpperCase();
-            int roomNum = 0;
+        for (int i = 0; i < MAX_DOCTORS + MAX_PATIENTS; i++) {
+            System.out.println("-------Current person: " + (i + 1) + persons[i]); ///////////////////////////////////////////////////////////
             if (persons[i] instanceof Patient) {
+                System.out.println("------inside if instanceof"); /////////////////////////////////////////////////////////////
                 Patient pt = (Patient) persons[i];
+
                 if (nameCompare.equalsIgnoreCase(pt.getName())) { // comparing name given to the name in object
+                    nameFound = true;
+                    System.out.println(nameFound); /////////////////////////////////////////////////////////////////////
                     System.out.print("Day being held in ward: ");
                     int heldWard = scan1.nextInt();
                     System.out.print("Room Type [elite/basic]: ");
                     String roomType = scan.nextLine().toUpperCase();
                     System.out.print("Enter deposit [min RM50]: ");
                     double deposit = scan1.nextDouble();
+
                     if (roomType.equalsIgnoreCase("elite")) {
                         roomNum = random.nextInt(50);
                         System.out.print("Room Number: " + roomNum);
@@ -157,6 +171,7 @@ public class HospitalApp {
                                 diagnosis, admissionDate, dischargeDate, insurance);
                         System.out.println("Total Price: RM" + wardRooms[i].calcTotal() + "\n");
                     }
+
                     if (roomType.equalsIgnoreCase("basic")) {
                         roomNum = random.nextInt(50);
                         System.out.print("Room Number: " + roomNum);
@@ -173,19 +188,17 @@ public class HospitalApp {
                                 diagnosis, admissionDate, dischargeDate, insurance);
                         System.out.println("Total Price: RM" + wardRooms[i].calcTotal() + "\n");
                     }
-                } else {
-                    System.out.println("Invalid");
-                    System.out.println();
-                    addWardRoom(); // to ask the user to input the data correctly
                 }
                 System.out.println();
-                System.out.println("\u001B[32mData stored successfully.\u001B[0m");
+                // System.out.println("\u001B[32mData stored successfully.\u001B[0m");
             }
+        }
+        if (!nameFound) {
+            System.out.println("Patient not found.");
         }
     }
 
     public static void viewDoctors() {
-        clearScreen();
         System.out.println("\n===== DISPLAY DOCTORS =====");
 
         boolean doctorsFound = false;
@@ -202,7 +215,6 @@ public class HospitalApp {
     }
 
     public static void viewPatients() {
-        clearScreen();
         System.out.println("\n===== DISPLAY PATIENTS =====");
 
         boolean patientsFound = false;
@@ -219,7 +231,6 @@ public class HospitalApp {
     }
 
     public static void viewWardRooms() {
-        clearScreen();
         System.out.println("\n===== DISPLAY WARD ROOMS =====");
 
         boolean wardRoomsFound = false;
@@ -235,7 +246,6 @@ public class HospitalApp {
     }
 
     public static void saveRecords() {
-        clearScreen();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("hospital_data.txt"))) {
             writer.write("======= HOSPITAL RECORD =======\n");
             writer.write("Date: " + currentDate + "\tDay: " + currentDate.getDayOfWeek() + "\n");
