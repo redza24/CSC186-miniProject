@@ -1,9 +1,6 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Random;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+import java.time.*;
 
 public class HospitalApp {
     private static Scanner scan = new Scanner(System.in); // for string
