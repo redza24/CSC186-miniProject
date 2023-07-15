@@ -42,6 +42,7 @@ public class Patient extends Person {
             coverage = 100;
         }
         total = coverage/100;
+        scan.close();
         return total;
     }
 
