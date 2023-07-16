@@ -2,18 +2,54 @@
 Date: 2023-07-16	Day: SUNDAY
 
 ===== DOCTORS =====
-
-	Doctor 1
-Name: AD
-Age: 12
-Gender: F
-Specialization: 12
-Availability: Y
-Contact Number: 21
-Email: 12
+No doctors found.
 
 ===== PATIENTS =====
-No patients found.
+
+	Patient 1
+Name: ADAM
+Age: 12
+Gender: M
+Diagnosis: ADW
+Admission Date: AWD
+Discharge Date: DA
+Insurance: true
+
+	Patient 2
+Name: ANJ
+Age: 21
+Gender: M
+Diagnosis: DAWA
+Admission Date: W
+Discharge Date: AWD
+Insurance: false
 
 ===== WARD ROOMS =====
-No ward rooms found.
+
+	Ward Room 1
+Name: ADAM
+Age: 12
+Gender: M
+Diagnosis: ADW
+Admission Date: AWD
+Discharge Date: DA
+Insurance: true
+Room Type: BASIC
+Room Number: 17
+Day being held in ward: 2
+Deposit: RM50.0
+Total Price: RM250.0
+
+	Ward Room 2
+Name: ANJ
+Age: 21
+Gender: M
+Diagnosis: DAWA
+Admission Date: W
+Discharge Date: AWD
+Insurance: false
+Room Type: BASIC
+Room Number: 17
+Day being held in ward: 2
+Deposit: RM50.0
+Total Price: RM550.0

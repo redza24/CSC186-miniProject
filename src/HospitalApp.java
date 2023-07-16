@@ -143,6 +143,12 @@ public class HospitalApp {
                     System.out.print("Enter deposit [min RM50]: ");
                     double deposit = scan1.nextDouble();
 
+                    double coverage = 0;
+                    if (pt.getInsurance() == true) {
+                        System.out.print("Coverage of that patient's insurance [in percentage]: ");
+                        coverage = scan1.nextDouble();
+                    }
+
                     roomNum = random.nextInt(50);
                     System.out.print("Room Number: " + roomNum);
                     System.out.println();
@@ -154,12 +160,18 @@ public class HospitalApp {
                     String admissionDate = pt.getAdmissionDate();
                     String dischargeDate = pt.getDischargeDate();
                     boolean insurance = pt.getInsurance();
+                    
+                    WardRoom wardRoom = new WardRoom(roomType, roomNum, heldWard, deposit, name, age, gender,
+                            diagnosis, admissionDate, dischargeDate, insurance);
+                            double total = wardRoom.calcTotal(coverage);
+
                     // store onto object
-                    wardRooms.add(new WardRoom(roomType, roomNum, heldWard, deposit, name, age, gender,
-                            diagnosis, admissionDate, dischargeDate, insurance));
-                    System.out.println("Total Price: RM" + wardRooms.get(i).calcTotal() + "\n");
+                    wardRooms.add(wardRoom);
+                    wardRoom.setPrice(total);
+
                     System.out.println("\u001B[32mData stored successfully.\u001B[0m");
                 }
+
                 System.out.println();
             }
         }
