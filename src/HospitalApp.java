@@ -143,39 +143,21 @@ public class HospitalApp {
                     System.out.print("Enter deposit [min RM50]: ");
                     double deposit = scan1.nextDouble();
 
-                    if (roomType.equalsIgnoreCase("elite")) {
-                        roomNum = random.nextInt(50);
-                        System.out.print("Room Number: " + roomNum);
-                        System.out.println();
-                        String name = pt.getName();
-                        int age = pt.getAge();
-                        char gender = pt.getGender();
-                        String diagnosis = pt.getDiagnosis();
-                        String admissionDate = pt.getAdmissionDate();
-                        String dischargeDate = pt.getDischargeDate();
-                        boolean insurance = pt.getInsurance();
-                        // store onto object
-                        wardRooms.add(new WardRoom(roomType, roomNum, heldWard, deposit, name, age, gender,
-                                diagnosis, admissionDate, dischargeDate, insurance));
-                        System.out.println("Total Price: RM" + wardRooms.get(i).calcTotal() + "\n");
-                    }
-
-                    if (roomType.equalsIgnoreCase("basic")) {
-                        roomNum = random.nextInt(50);
-                        System.out.print("Room Number: " + roomNum);
-                        System.out.println();
-                        String name = pt.getName();
-                        int age = pt.getAge();
-                        char gender = pt.getGender();
-                        String diagnosis = pt.getDiagnosis();
-                        String admissionDate = pt.getAdmissionDate();
-                        String dischargeDate = pt.getDischargeDate();
-                        boolean insurance = pt.getInsurance();
-                        // store onto object
-                        wardRooms.add(new WardRoom(roomType, roomNum, heldWard, deposit, name, age, gender,
-                                diagnosis, admissionDate, dischargeDate, insurance));
-                        System.out.println("Total Price: RM" + wardRooms.get(i).calcTotal() + "\n");
-                    }
+                    roomNum = random.nextInt(50);
+                    System.out.print("Room Number: " + roomNum);
+                    System.out.println();
+                    
+                    String name = pt.getName();
+                    int age = pt.getAge();
+                    char gender = pt.getGender();
+                    String diagnosis = pt.getDiagnosis();
+                    String admissionDate = pt.getAdmissionDate();
+                    String dischargeDate = pt.getDischargeDate();
+                    boolean insurance = pt.getInsurance();
+                    // store onto object
+                    wardRooms.add(new WardRoom(roomType, roomNum, heldWard, deposit, name, age, gender,
+                            diagnosis, admissionDate, dischargeDate, insurance));
+                    System.out.println("Total Price: RM" + wardRooms.get(i).calcTotal() + "\n");
                 }
                 System.out.println();
                 // System.out.println("\u001B[32mData stored successfully.\u001B[0m");
