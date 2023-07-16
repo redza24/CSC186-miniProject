@@ -107,14 +107,10 @@ public class HospitalApp {
         char gender = scan.nextLine().toUpperCase().charAt(0);
         System.out.print("Diagnosis: "); // to receive what kind of sickness patients are having
         String diagnosis = scan.nextLine().toUpperCase();
-        System.out.print("Admission Date [dd/mm]: ");
-        String admissionDate = scan.nextLine().toUpperCase();
-        System.out.print("Discharge Date [dd/mm]: ");
-        String dischargeDate = scan.nextLine().toUpperCase();
         System.out.print("Insurance [true/false]: ");
         boolean insurance = scan1.nextBoolean();
         // store onto object
-        persons.add(new Patient(name, age, gender, diagnosis, admissionDate, dischargeDate, insurance));
+        persons.add(new Patient(name, age, gender, diagnosis, insurance));
         
         System.out.println();
         System.out.println("\u001B[32mData stored successfully.\u001B[0m");
@@ -157,13 +153,10 @@ public class HospitalApp {
                     int age = pt.getAge();
                     char gender = pt.getGender();
                     String diagnosis = pt.getDiagnosis();
-                    String admissionDate = pt.getAdmissionDate();
-                    String dischargeDate = pt.getDischargeDate();
                     boolean insurance = pt.getInsurance();
                     
-                    WardRoom wardRoom = new WardRoom(roomType, roomNum, heldWard, deposit, name, age, gender,
-                            diagnosis, admissionDate, dischargeDate, insurance);
-                            double total = wardRoom.calcTotal(coverage);
+                    WardRoom wardRoom = new WardRoom(roomType, roomNum, heldWard, deposit, name, age, gender, diagnosis, insurance);
+                    double total = wardRoom.calcTotal(coverage);
 
                     // store onto object
                     wardRooms.add(wardRoom);

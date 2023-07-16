@@ -7,23 +7,23 @@ public class WardRoom {
     private Patient patient;
 
     //normal constructor
-    public WardRoom(String roomType, int roomNum, int heldWard, double deposit, String name, int age, char gender, String diagnosis, String admissionDate, String dischargeDate, boolean insurance) {
+    public WardRoom(String roomType, int roomNum, int heldWard, double deposit, String name, int age, char gender, String diagnosis, boolean insurance) {
         this.roomType = roomType;
         this.roomNum = roomNum;
         this.heldWard = heldWard;
         this.deposit = deposit;
         this.price = 0;
-        this.patient = new Patient(name, age, gender, diagnosis, admissionDate, dischargeDate, insurance);
+        this.patient = new Patient(name, age, gender, diagnosis, insurance);
     }
 
     //setter
-    public void setWardRoom(String roomType, int roomNum, int heldWard, double deposit, double price, String name, int age, char gender, String diagnosis, String admissionDate, String dischargeDate, boolean insurance) {
+    public void setWardRoom(String roomType, int roomNum, int heldWard, double deposit, double price, String name, int age, char gender, String diagnosis, boolean insurance) {
         this.roomType = roomType;
         this.roomNum = roomNum;
         this.heldWard = heldWard;
         this.deposit = deposit;
         this.price = price;
-        patient.setPatient(diagnosis, admissionDate, dischargeDate, insurance);
+        patient.setPatient(diagnosis, insurance);
     }
 
     public void setPrice(double coverage) {
@@ -53,6 +53,10 @@ public class WardRoom {
 
     //printer
     public String toString(){
-        return patient.toString() + "\nRoom Type: " + roomType + "\nRoom Number: " + roomNum + "\nDay being held in ward: " + heldWard + "\nDeposit: RM" + deposit + "\nTotal Price: RM" + getPrice();
+        return patient.toString() + "\nRoom Type: " + roomType 
+                                + "\nRoom Number: " + roomNum 
+                                + "\nDay being held in ward: " + heldWard 
+                                + "\nDeposit: RM" + deposit 
+                                + "\nTotal Price: RM" + getPrice();
     }
 }
