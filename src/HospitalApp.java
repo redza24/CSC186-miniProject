@@ -51,7 +51,7 @@ public class HospitalApp {
                     break;
                 default:
                     clearScreen();
-                    System.out.println("\n\tInvalid choice. Please try again.\n");
+                    System.out.println("\n\t\u001B[31mInvalid choice. Please try again.\u001B[0m\n");
                     break;
             }
         }
@@ -158,59 +158,61 @@ public class HospitalApp {
                     wardRooms.add(new WardRoom(roomType, roomNum, heldWard, deposit, name, age, gender,
                             diagnosis, admissionDate, dischargeDate, insurance));
                     System.out.println("Total Price: RM" + wardRooms.get(i).calcTotal() + "\n");
+                    System.out.println("\u001B[32mData stored successfully.\u001B[0m");
                 }
                 System.out.println();
-                // System.out.println("\u001B[32mData stored successfully.\u001B[0m");
             }
-
         }
         if (!nameFound) {
-            System.out.println("Patient not found.");
+            System.out.println("\u001B[31mPatient not found.\u001B[0m");
         }
     }
 
     public static void viewDoctors() {
         System.out.println("\n===== DISPLAY DOCTORS =====");
 
-        boolean doctorsFound = false;
+        int doctorCount = 0;
         for (Person person : persons) {
             if (person instanceof Doctor) {
+                doctorCount++;
+                System.out.print("\n\tDoctor " + doctorCount);
                 Doctor doctor = (Doctor) person;
                 System.out.println(doctor.toString());
-                doctorsFound = true;
             }
         }
-        if (!doctorsFound) {
-            System.out.println("No doctors found.");
+        if (doctorCount == 0) {
+            System.out.println("\u001B[31mNo doctors found.\u001B[0m");
         }
     }
 
     public static void viewPatients() {
         System.out.println("\n===== DISPLAY PATIENTS =====");
 
-        boolean patientsFound = false;
+        int patientCount = 0;
         for (Person person : persons) {
             if (person instanceof Patient) {
+                patientCount++;
+                System.out.print("\n\tPatient " + patientCount);
                 Patient patient = (Patient) person;
                 System.out.println(patient.toString());
-                patientsFound = true;
             }
         }
-        if (!patientsFound) {
-            System.out.println("No patients found.");
+        if (patientCount == 0) {
+            System.out.println("\u001B[31mNo patients found.\u001B[0m");
         }
     }
 
     public static void viewWardRooms() {
         System.out.println("\n===== DISPLAY WARD ROOMS =====");
 
-        boolean wardRoomsFound = false;
+        int wardRoomCount = 0;
         for (WardRoom wardRoom : wardRooms) {
+            wardRoomCount++;
+            System.out.println("\n\tWard Room " + wardRoomCount);
             System.out.println(wardRoom.toString());
-            wardRoomsFound = true;
         }
-        if (!wardRoomsFound) {
-            System.out.println("No ward rooms found.");
+        if (wardRoomCount == 0) {
+            System.out.println("\u001B[31mNo ward rooms found.\u001B[0m");
         }
     }
 
