@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Patient extends Person {
     private String diagnosis;
     private String admissionDate;
@@ -31,19 +29,18 @@ public class Patient extends Person {
 
 
     //processor
-    public double priceDeduction() {
-        Scanner scan = new Scanner(System.in);
-        double coverage = 0.0, total = 0.0;
-        if(insurance == true) {
-            System.out.print("Coverage of that patient's insurance [in percentage]: ");
-            coverage = scan.nextDouble();
-        }
-        else{
-            coverage = 100;
-        }
-        total = coverage/100;
-        return total;
-    }
+    // public double priceDeduction() {
+    //     Scanner scan = new Scanner(System.in);
+    //     double coverage = 0.0, total = 0.0;
+    //     if(insurance == true) {
+
+    //     }
+    //     else{
+    //         coverage = 100;
+    //     }
+    //     total = coverage/100;
+    //     return total;
+    // }
 
     //printer
     public String toString(){
