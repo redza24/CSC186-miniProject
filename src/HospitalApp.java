@@ -5,11 +5,8 @@ import java.time.*;
 public class HospitalApp {
     private static Scanner scan = new Scanner(System.in); // for string
     private static Scanner scan1 = new Scanner(System.in);
-    private static final int MAX_DOCTORS = 2;
-    private static final int MAX_PATIENTS = 2;
-    private static final int MAX_WARDROOMS = MAX_PATIENTS;
-    private static Person[] persons = new Person[MAX_PATIENTS + MAX_DOCTORS];
-    private static WardRoom[] wardRooms = new WardRoom[MAX_WARDROOMS];
+    private static ArrayList<Person> persons = new ArrayList<>();
+    private static ArrayList<WardRoom> wardRooms = new ArrayList<>();
     private static LocalDate currentDate = LocalDate.now();
 
     public static void main(String[] args) {
@@ -77,50 +74,48 @@ public class HospitalApp {
     }
 
     public static void addDoctor() {
-        for (int i = 0; i < MAX_DOCTORS; i++) {
-            System.out.println("\n<<<<<< ADD DOCTOR >>>>>>>");
-            System.out.print("Name: ");
-            String name = scan.nextLine().toUpperCase();
-            System.out.print("Age: ");
-            int age = scan1.nextInt();
-            System.out.print("Gender [M/F]: ");
-            char gender = scan.nextLine().toUpperCase().charAt(0);
-            System.out.print("Specialization [general/specialist/surgeon]: ");
-            String specialization = scan.nextLine().toUpperCase();
-            System.out.print("Availability [Y/N]: ");
-            char availability = scan.nextLine().toUpperCase().charAt(0);
-            System.out.print("Contact Number [XXX-XXXXXXX]: ");
-            String contactNum = scan.nextLine().toUpperCase();
-            System.out.print("Email: ");
-            String email = scan.nextLine().toUpperCase();
+        System.out.println("\n<<<<<< ADD DOCTOR >>>>>>>");
+        System.out.print("Name: ");
+        String name = scan.nextLine().toUpperCase();
+        System.out.print("Age: ");
+        int age = scan1.nextInt();
+        System.out.print("Gender [M/F]: ");
+        char gender = scan.nextLine().toUpperCase().charAt(0);
+        System.out.print("Specialization [general/specialist/surgeon]: ");
+        String specialization = scan.nextLine().toUpperCase();
+        System.out.print("Availability [Y/N]: ");
+        char availability = scan.nextLine().toUpperCase().charAt(0);
+        System.out.print("Contact Number [XXX-XXXXXXX]: ");
+        String contactNum = scan.nextLine().toUpperCase();
+        System.out.print("Email: ");
+        String email = scan.nextLine();
 
-            // store onto object
-            persons[i] = new Doctor(name, age, gender, specialization, availability, contactNum, email);
-        }
+        // store onto object
+        persons.add(new Doctor(name, age, gender, specialization, availability, contactNum, email));
+        
         System.out.println();
         System.out.println("\u001B[32mData stored successfully.\u001B[0m");
     }
 
     public static void addPatient() {
-        for (int i = MAX_DOCTORS; i < MAX_DOCTORS + MAX_PATIENTS; i++) {
-            System.out.println("\n<<<<<< ADD PATIENT >>>>>>>");
-            System.out.print("Name: ");
-            String name = scan.nextLine().toUpperCase();
-            System.out.print("Age: ");
-            int age = scan1.nextInt();
-            System.out.print("Gender [M/F]: ");
-            char gender = scan.nextLine().toUpperCase().charAt(0);
-            System.out.print("Diagnosis: "); // to receive what kind of sickness patients are having
-            String diagnosis = scan.nextLine().toUpperCase();
-            System.out.print("Admission Date [dd/mm]: ");
-            String admissionDate = scan.nextLine().toUpperCase();
-            System.out.print("Discharge Date [dd/mm]: ");
-            String dischargeDate = scan.nextLine().toUpperCase();
-            System.out.print("Insurance [true/false]: ");
-            boolean insurance = scan1.nextBoolean();
-            // store onto object
-            persons[i] = new Patient(name, age, gender, diagnosis, admissionDate, dischargeDate, insurance);
-        }
+        System.out.println("\n<<<<<< ADD PATIENT >>>>>>>");
+        System.out.print("Name: ");
+        String name = scan.nextLine().toUpperCase();
+        System.out.print("Age: ");
+        int age = scan1.nextInt();
+        System.out.print("Gender [M/F]: ");
+        char gender = scan.nextLine().toUpperCase().charAt(0);
+        System.out.print("Diagnosis: "); // to receive what kind of sickness patients are having
+        String diagnosis = scan.nextLine().toUpperCase();
+        System.out.print("Admission Date [dd/mm]: ");
+        String admissionDate = scan.nextLine().toUpperCase();
+        System.out.print("Discharge Date [dd/mm]: ");
+        String dischargeDate = scan.nextLine().toUpperCase();
+        System.out.print("Insurance [true/false]: ");
+        boolean insurance = scan1.nextBoolean();
+        // store onto object
+        persons.add(new Patient(name, age, gender, diagnosis, admissionDate, dischargeDate, insurance));
+        
         System.out.println();
         System.out.println("\u001B[32mData stored successfully.\u001B[0m");
     }
@@ -129,22 +124,18 @@ public class HospitalApp {
     public static void addWardRoom() {
         Random random = new Random(50); // random number for ward room
         int roomNum = 0;
-        
+
         System.out.println("<<<<<<<<<< ASSIGN PATIENT TO WARD ROOM >>>>>>>>>>");
         System.out.print("Patient Name: ");
         String nameCompare = scan.nextLine().toUpperCase();
-        System.out.println("--------Number of persons: " + (MAX_DOCTORS + MAX_PATIENTS)); ///////////////////////////////////////////
         boolean nameFound = false;
 
-        for (int i = 0; i < MAX_DOCTORS + MAX_PATIENTS; i++) {
-            System.out.println("-------Current person: " + (i + 1) + persons[i]); ///////////////////////////////////////////////////////////
-            if (persons[i] instanceof Patient) {
-                System.out.println("------inside if instanceof"); /////////////////////////////////////////////////////////////
-                Patient pt = (Patient) persons[i];
+        for (int i = 0; i < persons.size(); i++) {
+            if (persons.get(i) instanceof Patient) {
+                Patient pt = (Patient) persons.get(i);
 
                 if (nameCompare.equalsIgnoreCase(pt.getName())) { // comparing name given to the name in object
                     nameFound = true;
-                    System.out.println(nameFound); /////////////////////////////////////////////////////////////////////
                     System.out.print("Day being held in ward: ");
                     int heldWard = scan1.nextInt();
                     System.out.print("Room Type [elite/basic]: ");
@@ -164,9 +155,9 @@ public class HospitalApp {
                         String dischargeDate = pt.getDischargeDate();
                         boolean insurance = pt.getInsurance();
                         // store onto object
-                        wardRooms[i] = new WardRoom(roomType, roomNum, heldWard, deposit, name, age, gender,
-                                diagnosis, admissionDate, dischargeDate, insurance);
-                        System.out.println("Total Price: RM" + wardRooms[i].calcTotal() + "\n");
+                        wardRooms.add(new WardRoom(roomType, roomNum, heldWard, deposit, name, age, gender,
+                                diagnosis, admissionDate, dischargeDate, insurance));
+                        System.out.println("Total Price: RM" + wardRooms.get(i).calcTotal() + "\n");
                     }
 
                     if (roomType.equalsIgnoreCase("basic")) {
@@ -181,14 +172,15 @@ public class HospitalApp {
                         String dischargeDate = pt.getDischargeDate();
                         boolean insurance = pt.getInsurance();
                         // store onto object
-                        wardRooms[i] = new WardRoom(roomType, roomNum, heldWard, deposit, name, age, gender,
-                                diagnosis, admissionDate, dischargeDate, insurance);
-                        System.out.println("Total Price: RM" + wardRooms[i].calcTotal() + "\n");
+                        wardRooms.add(new WardRoom(roomType, roomNum, heldWard, deposit, name, age, gender,
+                                diagnosis, admissionDate, dischargeDate, insurance));
+                        System.out.println("Total Price: RM" + wardRooms.get(i).calcTotal() + "\n");
                     }
                 }
                 System.out.println();
                 // System.out.println("\u001B[32mData stored successfully.\u001B[0m");
             }
+
         }
         if (!nameFound) {
             System.out.println("Patient not found.");
@@ -199,9 +191,9 @@ public class HospitalApp {
         System.out.println("\n===== DISPLAY DOCTORS =====");
 
         boolean doctorsFound = false;
-        for (int i = 0; i < MAX_DOCTORS; i++) {
-            if (persons[i] instanceof Doctor) {
-                Doctor doctor = (Doctor) persons[i];
+        for (Person person : persons) {
+            if (person instanceof Doctor) {
+                Doctor doctor = (Doctor) person;
                 System.out.println(doctor.toString());
                 doctorsFound = true;
             }
@@ -215,9 +207,9 @@ public class HospitalApp {
         System.out.println("\n===== DISPLAY PATIENTS =====");
 
         boolean patientsFound = false;
-        for (int i = MAX_DOCTORS; i < MAX_DOCTORS + MAX_PATIENTS; i++) {
-            if (persons[i] instanceof Patient) {
-                Patient patient = (Patient) persons[i];
+        for (Person person : persons) {
+            if (person instanceof Patient) {
+                Patient patient = (Patient) person;
                 System.out.println(patient.toString());
                 patientsFound = true;
             }
@@ -231,11 +223,9 @@ public class HospitalApp {
         System.out.println("\n===== DISPLAY WARD ROOMS =====");
 
         boolean wardRoomsFound = false;
-        for (int i = 0; i < MAX_WARDROOMS; i++) {
-            if (wardRooms[i] != null) {
-                System.out.println(wardRooms[i].toString());
-                wardRoomsFound = true;
-            }
+        for (WardRoom wardRoom : wardRooms) {
+            System.out.println(wardRoom.toString());
+            wardRoomsFound = true;
         }
         if (!wardRoomsFound) {
             System.out.println("No ward rooms found.");
@@ -249,11 +239,11 @@ public class HospitalApp {
 
             writer.write("\n===== DOCTORS =====\n");
             int doctorCount = 0;
-            for (int i = 0; i < MAX_DOCTORS + MAX_PATIENTS; i++) {
-                if (persons[i] instanceof Doctor) {
+            for (Person person : persons) {
+                if (person instanceof Doctor) {
                     doctorCount++;
                     writer.write("\n\tDoctor " + doctorCount);
-                    Doctor doctor = (Doctor) persons[i];
+                    Doctor doctor = (Doctor) person;
                     writer.write(doctor.toString() + "\n");
                 }
             }
@@ -263,11 +253,11 @@ public class HospitalApp {
 
             writer.write("\n===== PATIENTS =====\n");
             int patientCount = 0;
-            for (int i = 0; i < MAX_DOCTORS + MAX_PATIENTS; i++) {
-                if (persons[i] instanceof Patient) {
+            for (Person person : persons) {
+                if (person instanceof Patient) {
                     patientCount++;
                     writer.write("\n\tPatient " + patientCount);
-                    Patient patient = (Patient) persons[i];
+                    Patient patient = (Patient) person;
                     writer.write(patient.toString() + "\n");
                 }
             }
@@ -277,18 +267,14 @@ public class HospitalApp {
 
             writer.write("\n===== WARD ROOMS =====\n");
             int wardRoomCount = 0;
-            for (int i = 0; i < MAX_WARDROOMS; i++) {
-                if (wardRooms[i] != null) {
-                    wardRoomCount++;
-                    writer.write("\n\tWard Room " + wardRoomCount);
-                    writer.write(wardRooms.toString() + "\n");
-                }
+            for (WardRoom wardRoom : wardRooms) {
+                wardRoomCount++;
+                writer.write("\n\tWard Room " + wardRoomCount);
+                writer.write(wardRoom.toString() + "\n");
             }
             if (wardRoomCount == 0) {
                 writer.write("No ward rooms found.\n");
             }
-
-
 
             System.out.println("\u001B[32mData saved successfully to hospital_data.txt.\u001B[0m");
         } catch (IOException e) {
